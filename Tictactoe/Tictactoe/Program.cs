@@ -27,17 +27,16 @@ namespace Tictactoe
         static void DrawTable()
         {
             Console.WriteLine($"╔══╦══╦══╗");
-            Console.WriteLine($"║ {table[0, 0]} ║ {table[0, 1]} ║ {table[0, 2]} ║");
+            Console.WriteLine($"║ {table[0, 0], -1} ║{table[0, 1],-3}║{table[0, 2],-3}║");
             Console.WriteLine($"╠══╬══╬══╣");
-            Console.WriteLine($"║ {table[1, 0]} ║ {table[1, 1]} ║ {table[0, 0]} ║");
+            Console.WriteLine($"║ {table[1, 0],-1} ║{table[1, 1],-3}║{table[1, 2],-3}║");
             Console.WriteLine($"╠══╬══╬══╣");
-            Console.WriteLine($"║ {table[2, 0]} ║ {table[2, 1]} ║ {table[2, 2]} ║");
+            Console.WriteLine($"║ {table[2, 0], 1} ║{table[2, 1],-3}║{table[2, 2],-3}║");
             Console.WriteLine($"╚══╩══╩══╝");
         }
 
-        static string[,] SelectCoord(char[,] table, int movement)
+        static void SelectCoord(char[,] table, int movement)
         {
-            string[,] aux = new string[3, 3];
             int input;
             bool isEmpty = false;
 
@@ -81,8 +80,6 @@ namespace Tictactoe
                 }
 
             } while (isEmpty == false);
-
-            return aux;
         }
 
         private static int ValidateNumber()
@@ -206,7 +203,6 @@ namespace Tictactoe
                     char player = ChoosePlayer(movement);
                     Console.WriteLine($"El ganador es: {player}");
                 }
-                Console.ReadKey();
             } while (winner == false);
         }
         
