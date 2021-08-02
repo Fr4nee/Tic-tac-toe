@@ -4,10 +4,10 @@ namespace Tictactoe
 {
     class Program
     {
-        public static string[,] table = new string[3, 3];
+        public static char[,] table = new char[3, 3];
         public static int p1o = 1;
         public static int p2x = 2;
-        public static int currentPlayer = Turn(currentPlayer);
+        public static int currentPlayer = 0;
 
         static void Main(string[] args)
         {
@@ -35,49 +35,114 @@ namespace Tictactoe
             Console.WriteLine($"╚══╩══╩══╝");
         }
 
-        static string[,] SelectCoord(string[,] table)
+        static string[,] SelectCoord(char[,] table, int movement)
         {
             string[,] aux = new string[3, 3];
             int input;
+            bool isEmpty = false;
 
-            Console.Write("Write the coordinates with your NumPad");
-            int.TryParse(Console.ReadLine(), out input);
-
-            switch (input)
+            do
             {
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    Console.WriteLine("insert a correct option:");
-                    break;
-            }
+                Console.Write("Write the coordinates with your NumPad: ");
+                input = ValidateNumber();
+                switch (input)
+                {
+                    case 7:
+                        isEmpty = Movement(0, 0, movement);
+                        break;
+                    case 8:
+                        isEmpty = Movement(0, 1, movement);
+                        break;
+                    case 9:
+                        isEmpty = Movement(0, 2, movement);
+                        break;
+                    case 4:
+                        isEmpty = Movement(1, 0, movement);
+                        break;
+                    case 5:
+                        isEmpty = Movement(1, 1, movement);
+                        break;
+                    case 6:
+                        isEmpty = Movement(1, 2, movement);
+                        break;
+                    case 1:
+                        isEmpty = Movement(2, 0, movement);
+                        break;
+                    case 2:
+                        isEmpty = Movement(2, 1, movement);
+                        break;
+                    case 3:
+                        isEmpty = Movement(2, 2, movement);
+                        break;
+
+                    default:
+                        Console.WriteLine("insert a correct option: ");
+                        break;
+                }
+
+            } while (isEmpty == false);
 
             return aux;
         }
 
-        static int Turn(int player)
+        private static int ValidateNumber()
         {
-            if (player.Equals(1))
+            int input;
+            while (int.TryParse(Console.ReadLine(), out input) != true)
             {
-                return 2;
+                Console.WriteLine("Wrong, rewrite your option: ");
+                DrawTableDemo();
             }
-            return 1;
+            return input;
+        }
+
+        private static bool Movement(int f, int c, int movement)
+        {
+            bool isEmpty = false;
+            isEmpty = IsEmpty(f, c);
+            if (isEmpty == true)
+            {
+                table[f, c] = ChoosePlayer(movement);
+            }
+            else
+            {
+                Console.WriteLine("Error, the cell is already used");
+            }
+            return isEmpty;
+        }
+
+        private static bool IsEmpty(int f, int c)
+        {
+            bool isEmpty;
+
+            if (table[f, c] == '\0')
+            {
+                isEmpty = true;
+            }
+            else
+            {
+                isEmpty = false;
+            }
+            return isEmpty;
+        }
+
+        private static char ChoosePlayer(int movementNumber)
+        {
+            char player = 'N';
+            if (movementNumber % 2 == 0)
+            {
+                player = 'X';
+            }
+            else
+            {
+                player = 'O';
+            }
+            return player;
+        }
+
+        static int Turn()
+        {
+            return currentPlayer++;
         }
 
         static string[,] InsertSymbol(string[,] table)
@@ -87,56 +152,64 @@ namespace Tictactoe
             return aux;
         }
 
-        static int GetWiner()
+        static bool GetWiner()
         {
-            int win = 0;
-
-            for (int f = 0; f < table.GetLength(0); f++)
+            bool win = false;
+            if (table[0, 0] == table[0, 1] && table[0, 0] == table[0, 2] && table[0,0] != '\0')
             {
-                for (int c = 0; c < table.GetLength(1); c++)
-                {
-                    if (table[f, 0] == "x")
-                    {
-
-                    }
-                    if (table[f, 1] == "x")
-                    {
-
-                    }
-                    if (table[f, 2] == "x")
-                    {
-
-                    }
-                    if (table[0, c] == "x")
-                    {
-
-                    }
-                    if (table[1, c] == "x")
-                    {
-
-                    }
-                    if (table[2, c] == "x")
-                    {
-
-                    }
-                }
+                win = true;
             }
-            return win;
+            else if (table[1, 0] == table[1, 1] && table[1, 0] == table[1, 2] && table[1, 0] != '\0')
+            {
+                win = true;
+            }
+            else if (table[2, 0] == table[2, 1] && table[2, 0] == table[2, 2] && table[2, 0] != '\0') 
+            {
+                win = true;
+            }
+            else if (table[0, 0] == table[1, 1] && table[0, 0] == table[2, 2] && table[0, 0] != '\0')
+            {
+                win = true;
+            }
+            else if (table[0, 2] == table[1, 1] && table[0,2]== table[2, 0] && table[0, 2] != '\0')
+            {
+                   win = true;
+            }
+            else if(table[0,0]== table[1,0] && table[0,0] == table[2, 0] && table[0, 0] != '\0')
+            {
+                win = true;
+            }
+            else if (table[0, 1] == table[1, 1] && table[0, 1] == table[2, 1] && table[0, 1] != '\0')
+            {
+                win = true;
+            }
+            else if (table[0, 2] == table[1, 2] && table[0, 2] == table[2, 2] && table[0, 2] != '\0')
+            {
+                win = true;
+            }
+           return win;
         }
 
         static void GameFlow()
         {
-            DrawTableDemo();
+            int movement = 0;
+            bool winner = false;
             do
             {
+                movement++;
+                DrawTableDemo();
                 DrawTable();
-                SelectCoord(table);
-                GetWiner();                
-
-            } while (GetWiner() == 1);
-
+                SelectCoord(table, movement);
+                winner = GetWiner();
+                if (winner == true)
+                {
+                    char player = ChoosePlayer(movement);
+                    Console.WriteLine($"El ganador es: {player}");
+                }
+                Console.ReadKey();
+            } while (winner == false);
         }
-
+        
         // Bienvenida, muestro metodologia de tablero y reglas
         // Seleccion de coordenada del P1
         // Cargo el dato
