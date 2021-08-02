@@ -137,5 +137,22 @@ namespace Tictactoe
 
         }
 
+        // Bienvenida, muestro metodologia de tablero y reglas
+        // Seleccion de coordenada del P1
+        // Cargo el dato
+        // Imprimo el resultado
+        // Verifico ganador
+        /*****************************************************/
+        // Seleccion de coordenada del P2
+        // Cargo el dato 
+        // Imprimo el resultado
+        // Verifico ganador
+        /*******************Gana algun jugador****************/
+        // Verifico ganador == true / return 1
+        // Imprimo ganador
+
+
+
+
     }
 }
