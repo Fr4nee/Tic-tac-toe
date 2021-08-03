@@ -9,12 +9,16 @@ namespace Tictactoe
 
         static void Main(string[] args)
         {
+            conectionDB conn = new conectionDB();
+
+            conn.Open();
             GameFlow();
             Console.ReadKey();
         }
         static void DrawTableDemo()
         {
-            Console.WriteLine("****Welcome to Tic-Tac-Toe****\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("**** Welcome to Tic-Tac-Toe ****\n");
             Console.WriteLine($"╔═══╦═══╦═══╗");
             Console.WriteLine($"║ 7 ║ 8 ║ 9 ║");
             Console.WriteLine($"╠═══╬═══╬═══╣");
@@ -24,6 +28,7 @@ namespace Tictactoe
             Console.WriteLine($"╚═══╩═══╩═══╝");
             Console.WriteLine("Play with your NumPad");
             Console.WriteLine("\nPress Enter to start the game...");
+            Console.ResetColor();
             Console.ReadKey();
             Console.Clear();
         }

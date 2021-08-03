@@ -37,3 +37,10 @@ C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\obj\Debug\netcor
 C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\obj\Debug\netcoreapp3.1\Tictactoe.dll
 C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\obj\Debug\netcoreapp3.1\Tictactoe.pdb
 C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\obj\Debug\netcoreapp3.1\Tictactoe.genruntimeconfig.cache
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Franco\Desktop\Proyectos C#\tictac\Tictactoe\Tictactoe\obj\Debug\netcoreapp3.1\Tictactoe.csproj.CopyComplete
