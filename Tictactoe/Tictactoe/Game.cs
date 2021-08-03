@@ -9,25 +9,49 @@ namespace Tictactoe
         public static string[,] table = new string[3, 3];
         public static int currentPlayer = 0;
         public static int movement = 0;
+        public static bool a = true;
 
         public static ConnectionDB conn = new ConnectionDB();
 
-        public static void DrawTableDemo()
+        public void Menu()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("**** Welcome to Tic-Tac-Toe ****\n");
-            Console.WriteLine($"╔═══╦═══╦═══╗");
-            Console.WriteLine($"║ 7 ║ 8 ║ 9 ║");
-            Console.WriteLine($"╠═══╬═══╬═══╣");
-            Console.WriteLine($"║ 4 ║ 5 ║ 6 ║");
-            Console.WriteLine($"╠═══╬═══╬═══╣");
-            Console.WriteLine($"║ 1 ║ 2 ║ 3 ║");
-            Console.WriteLine($"╚═══╩═══╩═══╝");
-            Console.WriteLine("Play with your NumPad");
-            Console.WriteLine("\nPress Enter to start the game...");
-            Console.ResetColor();
-            Console.ReadKey();
-            Console.Clear();
+            do
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("**** Welcome to Tic-Tac-Toe ****\n");
+                Console.WriteLine($"╔═══╦═══╦═══╗");
+                Console.WriteLine($"║ 7 ║ 8 ║ 9 ║");
+                Console.WriteLine($"╠═══╬═══╬═══╣");
+                Console.WriteLine($"║ 4 ║ 5 ║ 6 ║");
+                Console.WriteLine($"╠═══╬═══╬═══╣");
+                Console.WriteLine($"║ 1 ║ 2 ║ 3 ║");
+                Console.WriteLine($"╚═══╩═══╩═══╝");
+                Console.WriteLine("Play with your NumPad");
+                Console.WriteLine("1) Start Game");
+                Console.WriteLine("0) Exit");
+                Console.ResetColor();
+
+            } while (ControlMenu() == a);
+        }
+        public static bool ControlMenu()
+        {
+            a = true;
+            int op;
+            int.TryParse(Console.ReadLine(), out op);
+            switch (op)
+            {
+                case 1:
+                    GameFlow();
+                    break;
+                case 0:
+                    return Exit(a);
+
+                default:
+                    Console.WriteLine("Error!!!!!!!");
+                    break;
+            }
+            return a;
         }
         public static void DrawTable()
         {
@@ -43,7 +67,6 @@ namespace Tictactoe
         public static void SelectCoord()
         {
             int input;
-
             bool isEmpty = false;
 
             do
@@ -79,12 +102,10 @@ namespace Tictactoe
                     case 3:
                         isEmpty = Movement(2, 2);
                         break;
-
                     default:
                         Console.WriteLine("insert a correct option: ");
                         break;
                 }
-
             } while (isEmpty == false);
         }
 
@@ -95,7 +116,7 @@ namespace Tictactoe
             while (int.TryParse(Console.ReadLine(), out input) != true)
             {
                 Console.WriteLine("Wrong, rewrite your option: ");
-                DrawTableDemo();
+                //DrawTableDemo();
             }
             return input;
         }
@@ -133,9 +154,7 @@ namespace Tictactoe
                 conn.UpdateMovement(row, column, player);
             }
             else
-            {
                 Console.WriteLine("Error, the cell is already used");
-            }
             return isEmpty;
         }
 
@@ -144,13 +163,9 @@ namespace Tictactoe
             bool isEmpty;
 
             if (table[f, c] == null)
-            {
                 isEmpty = true;
-            }
             else
-            {
                 isEmpty = false;
-            }
             return isEmpty;
         }
 
@@ -159,13 +174,9 @@ namespace Tictactoe
             string player = null;
 
             if (movement % 2 == 0)
-            {
                 player = "X";
-            }
             else
-            {
                 player = "O";
-            }
             return player;
         }
 
@@ -173,44 +184,28 @@ namespace Tictactoe
         {
             bool win = false;
             if (table[0, 0] == table[0, 1] && table[0, 0] == table[0, 2] && table[0, 0] != null)
-            {
                 win = true;
-            }
             else if (table[1, 0] == table[1, 1] && table[1, 0] == table[1, 2] && table[1, 0] != null)
-            {
                 win = true;
-            }
             else if (table[2, 0] == table[2, 1] && table[2, 0] == table[2, 2] && table[2, 0] != null)
-            {
                 win = true;
-            }
             else if (table[0, 0] == table[1, 1] && table[0, 0] == table[2, 2] && table[0, 0] != null)
-            {
                 win = true;
-            }
             else if (table[0, 2] == table[1, 1] && table[0, 2] == table[2, 0] && table[0, 2] != null)
-            {
                 win = true;
-            }
             else if (table[0, 0] == table[1, 0] && table[0, 0] == table[2, 0] && table[0, 0] != null)
-            {
                 win = true;
-            }
             else if (table[0, 1] == table[1, 1] && table[0, 1] == table[2, 1] && table[0, 1] != null)
-            {
                 win = true;
-            }
             else if (table[0, 2] == table[1, 2] && table[0, 2] == table[2, 2] && table[0, 2] != null)
-            {
                 win = true;
-            }
             return win;
         }
 
-        public void GameFlow()
+        public static void GameFlow()
         {
+            Console.Clear();
             bool winner = false;
-            DrawTableDemo();
             conn.RestartGame();
             do
             {
@@ -224,18 +219,30 @@ namespace Tictactoe
                     string player = ChoosePlayer();
                     DrawTable();
                     Console.WriteLine($"The winner is: {player}!!!!!");
+                    Console.ReadKey();
                 }
                 if (movement == 9)
                 {
                     DrawTable();
                     Console.WriteLine("Game over, is a Tie!");
+                    Console.ReadKey();
                     winner = true;
                 }
             } while (winner == false);
-
             Reset();
         }
 
+        public static bool Exit(bool a)
+        {
+            string ext = "n";
+            bool e = true;
+            Console.Clear();
+            Console.WriteLine("Do you want to Exit? y/n");
+            ext = Console.ReadLine().Trim().ToLower();
+            if (ext == "y")
+                return a = false;
+            return a;
+        }
 
         public static void Reset()
         {
