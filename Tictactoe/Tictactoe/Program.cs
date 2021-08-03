@@ -5,8 +5,6 @@ namespace Tictactoe
     class Program
     {
         public static string[,] table = new string[3, 3];
-        public static int p1o = 1;
-        public static int p2x = 2;
         public static int currentPlayer = 0;
 
         static void Main(string[] args)
@@ -16,6 +14,7 @@ namespace Tictactoe
         }
         static void DrawTableDemo()
         {
+            Console.WriteLine("****Welcome to Tic-Tac-Toe****\n");
             Console.WriteLine($"╔═══╦═══╦═══╗");
             Console.WriteLine($"║ 7 ║ 8 ║ 9 ║");
             Console.WriteLine($"╠═══╬═══╬═══╣");
@@ -23,6 +22,10 @@ namespace Tictactoe
             Console.WriteLine($"╠═══╬═══╬═══╣");
             Console.WriteLine($"║ 1 ║ 2 ║ 3 ║");
             Console.WriteLine($"╚═══╩═══╩═══╝");
+            Console.WriteLine("Play with your NumPad");
+            Console.WriteLine("\nPress Enter to start the game...");
+            Console.ReadKey();
+            Console.Clear();
         }
         static void DrawTable()
         {
@@ -38,6 +41,7 @@ namespace Tictactoe
         static void SelectCoord(int movement)
         {
             int input;
+
             bool isEmpty = false;
 
             do
@@ -85,6 +89,7 @@ namespace Tictactoe
         private static int ValidateNumber()
         {
             int input;
+
             while (int.TryParse(Console.ReadLine(), out input) != true)
             {
                 Console.WriteLine("Wrong, rewrite your option: ");
@@ -96,7 +101,9 @@ namespace Tictactoe
         private static bool Movement(int f, int c, int movement)
         {
             bool isEmpty = false;
+
             isEmpty = IsEmpty(f, c);
+
             if (isEmpty == true)
             {
                 table[f, c] = ChoosePlayer(movement);
@@ -179,10 +186,10 @@ namespace Tictactoe
         {
             int movement = 0;
             bool winner = false;
+            DrawTableDemo();
             do
             {
                 movement++;
-                DrawTableDemo();
                 DrawTable();
                 SelectCoord(movement);
                 winner = GetWiner();
@@ -191,32 +198,15 @@ namespace Tictactoe
                 {
                     string player = ChoosePlayer(movement);
                     DrawTable();
-                    Console.WriteLine($"El ganador es: {player}");
+                    Console.WriteLine($"The winner is: {player}!!!!!");
                 }
-                if (movement == 10)
+                if (movement == 9)
                 {
-                    winner = true;
+                    DrawTable();
                     Console.WriteLine("Game over, is a Tie!");
+                    winner = true;
                 }
             } while (winner == false);
         }
-        
-        // Bienvenida, muestro metodologia de tablero y reglas
-        // Seleccion de coordenada del P1
-        // Cargo el dato
-        // Imprimo el resultado
-        // Verifico ganador
-        /*****************************************************/
-        // Seleccion de coordenada del P2
-        // Cargo el dato 
-        // Imprimo el resultado
-        // Verifico ganador
-        /*******************Gana algun jugador****************/
-        // Verifico ganador == true / return 1
-        // Imprimo ganador
-
-
-
-
     }
 }
